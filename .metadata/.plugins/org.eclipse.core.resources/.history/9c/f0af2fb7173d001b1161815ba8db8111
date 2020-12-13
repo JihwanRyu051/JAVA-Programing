@@ -1,0 +1,90 @@
+package TicTacToeUsingGUI;
+import javax.swing.*;
+import java.awt.event.*;
+import java.awt.*;
+import javax.swing.border.LineBorder;
+
+public class TicTacToe extends JFrame{
+	JLabel label;
+	JTextArea text;
+	int count = 0;
+	
+	class Terminator extends WindowAdapter{
+		public void windowClosing(WindowEvent e) {
+			System.exit(0);
+		}
+	}
+	
+	class QuitAction implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			System.exit(0);
+		}
+	}
+	
+	
+		
+	public TicTacToe() {
+		setTitle("Tic Tac Toe");
+		setSize(500,500);
+		setLocation(100,200);
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		addWindowListener(new Terminator());
+		setContentPane(getPanel());
+	}
+		
+	public static void main(String[] args) {
+		JFrame jf = new TicTacToe();
+		jf.setVisible(true);
+	}
+	
+	public JPanel getPanel() {
+		JPanel panel = new JPanel();
+		
+		panel.setLayout(new GridLayout(4,3));
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.weightx = 1.0;
+		gbc.weighty = 1.0;
+		gbc.fill = GridBagConstraints.BOTH;
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		gbc.gridwidth = 3;
+		gbc.gridheight = 1;
+		panel.add(label = makeLabel(), gbc);
+		for(int i=0; i<3; i++) {
+			for(int j=0; j<3; j++) {
+				gbc.gridx = j;
+				gbc.gridy = i+1;
+				gbc.gridwidth = 1;
+				gbc.gridheight = 1;
+				panel.add(makeButton(i, j),gbc);
+			}
+		}
+		
+		return panel; //setLayout(), FlowLayout()...
+	}
+	
+	private JButton makeButton(int i, int j) {
+		final JButton btn = new JButton();
+		btn.setName(i+""+j);
+		btn.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e) {
+					if(btn.getText().equals("")) {
+					count++;
+					if(count%2 == 0) {
+						btn.setText("X");
+					}
+					else {
+						btn.setText("O");
+					}
+				}
+			}
+			});
+		return btn;
+	}
+	
+	private JLabel makeLabel() {
+		JLabel hello = new JLabel("Hello Frame");
+		return hello;
+	}
+	
+}

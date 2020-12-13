@@ -1,0 +1,94 @@
+package TicTacToeUsingGUI;
+import javax.swing.*;
+import java.awt.event.*;
+import java.awt.*;
+import javax.swing.border.LineBorder;
+
+public class TicTacToe extends JFrame{
+	JLabel label;
+	JTextArea text;
+	GridBagConstraints gbc = new GridBagConstraints();
+	GridBagLayout grid = new GridBagLayout();
+	TicTacToeBoard TTB = new TicTacToeBoard();
+	int count = 0;
+	
+	class Terminator extends WindowAdapter{
+		public void windowClosing(WindowEvent e) {
+			System.exit(0);
+		}
+	}
+	
+	class QuitAction implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			System.exit(0);
+		}
+	}
+	public TicTacToe() {
+		setTitle("Tic Tac Toe");
+		setSize(500,500);
+		setLocation(100,200);
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		addWindowListener(new Terminator());
+		setContentPane(getPanel());
+	}
+		
+	public static void main(String[] args) {
+		JFrame jf = new TicTacToe();
+		jf.setVisible(true);
+		
+	}
+	
+	public JPanel getPanel() {
+		JPanel panel = new JPanel();
+		
+		panel.setLayout(grid);
+	
+		gbc.fill = GridBagConstraints.BOTH;
+		gbc.weightx = 1;
+		gbc.weighty = 1;
+		label = makeLabel();
+		make(label, 0,0,3,1);
+		panel.add(label);
+		
+		for(int i=0; i<3; i++) {
+			for(int j=0; j<3; j++) {
+				JButton btn = makeButton(i,j);
+				make(btn,j,i+1,1,1);
+				panel.add(btn,gbc);
+			}
+		}	
+		return panel; //setLayout(), FlowLayout()...
+	}
+	
+	public void make(JComponent c, int x, int y, int w, int h) {
+        gbc.gridx = x;
+        gbc.gridy = y;
+        gbc.gridwidth = w;
+        gbc.gridheight = h;
+        grid.setConstraints(c, gbc);
+        // GridBagLayout의 GridBagConstraints의 set하는 방법
+ }
+	private JButton makeButton(int i, int j) {
+		final JButton btn = new JButton();
+		btn.setName(i+""+j);
+		btn.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e) {
+					if(btn.getText().equals("")) {
+					count++;
+					if(count%2 == 0) btn.setText("X");
+					else 			 btn.setText("O");
+					label.setText(TTB.run(btn));
+				}
+			}
+			});
+		return btn;
+	}
+	
+	private JButton
+	
+	private JLabel makeLabel() {
+		JLabel hello = new JLabel("");
+		return hello;
+	}
+	
+}

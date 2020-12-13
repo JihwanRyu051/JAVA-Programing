@@ -1,0 +1,2 @@
+INDEX VERSION 1.131+C:\2020_2학기\플랫폼기반프로그래밍\과제\Assignment2\.metadata\.plugins\org.eclipse.jdt.core
+1067094681.index

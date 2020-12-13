@@ -1,0 +1,70 @@
+package TicTacToeUsingGUI;
+import javax.swing.*;
+import java.awt.event.*;
+import java.awt.*;
+import javax.swing.border.LineBorder;
+
+public class TicTacToe extends JFrame{
+	JLabel label;
+	JTextArea text;
+	class Terminator extends WindowAdapter{
+		public void windowClosing(WindowEvent e) {
+			System.exit(0);
+		}
+	}
+	
+	class QuitAction implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			System.exit(0);
+		}
+	}
+	
+	
+		
+	public TicTacToe() {
+		setTitle("Tic Tac Toe");
+		setSize(500,500);
+		setLocation(100,200);
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		addWindowListener(new Terminator());
+		setContentPane(getPanel());
+	}
+		
+	public static void main(String[] args) {
+		JFrame jf = new TicTacToe();
+		jf.setVisible(true);
+	}
+	
+	public JPanel getPanel() {
+		JPanel panel = new JPanel();
+		panel.setLayout(null);
+		panel.add(label = makeLabel());
+		panel.add(makeButton());
+		panel.add(text = makeTextArea());
+		return panel; //setLayout(), FlowLayout()...
+	}
+	
+	private JButton makeButton() {
+		JButton btnCopy = new JButton("Copy");
+		btnCopy.setBounds(new Rectangle(20, 50, 200, 25));
+		btnCopy.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e) {
+					label.setText(text.getText());
+				}
+			});
+		return btnCopy;
+	}
+	
+	private JLabel makeLabel() {
+		JLabel hello = new JLabel("Hello Frame");
+		hello.setBounds(new Rectangle(20,20,200,25));
+		return hello;
+	}
+	
+	private JTextArea makeTextArea() {
+		JTextArea area = new JTextArea();
+		area.setBounds(new Rectangle(20,80,200,50));
+		area.setBorder(new LineBorder(Color.black));
+		return area;
+	}
+}
