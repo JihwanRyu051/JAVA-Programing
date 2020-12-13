@@ -6,15 +6,12 @@ import javax.swing.border.LineBorder;
 
 public class TicTacToe extends JFrame{
 	JLabel label;
-	JLabel timeLabel;
 	JTextArea text;
 	JButton[][] btnArr = new JButton[3][3];
 	GridBagConstraints gbc = new GridBagConstraints();
 	GridBagLayout grid = new GridBagLayout();
 	TicTacToeBoard TTB = new TicTacToeBoard();
 	JPanel panel = new JPanel();
-	float stratTime = System.currentTimeMillis();
-	float time;
 	
 	int count = 0;
 	
@@ -73,12 +70,12 @@ public class TicTacToe extends JFrame{
 				panel.add(btnArr[i][j],gbc);
 			}
 		}
-		JButton Quitbtn = makeButton(-1,0);
-		JButton Rebtn = makeButton(-1,-1);
+		JButton Quitbtn = makeButton(-1, 0);
+		JButton Rebtn   = makeButton(-1,-1);
 		make(Quitbtn, 0,4,1,1);
 		panel.add(Quitbtn);
-		make(Rebtn, 2,4,1,1);
-		panel.add(Rebtn);	
+		make(Rebtn  , 2,4,1,1);
+		panel.add(Rebtn  );	
 		return panel; //setLayout(), FlowLayout()...
 	}
 	
@@ -113,14 +110,6 @@ public class TicTacToe extends JFrame{
 						label.setText(TTB.run(btn));
 						}
 					}
-					else {
-						JButton Quitbtn = makeButton(-1,0);
-						JButton Rebtn = makeButton(-1,-1);
-						make(Quitbtn, 0,4,1,1);
-						panel.add(Quitbtn);
-						make(Rebtn, 2,4,1,1);
-						panel.add(Rebtn);				
-					}
 			}
 			});
 		}
@@ -132,7 +121,4 @@ public class TicTacToe extends JFrame{
 		result.setFont(new Font("Serif", Font.BOLD, 25));
 		return result;
 	}
-
-
-	
 }
